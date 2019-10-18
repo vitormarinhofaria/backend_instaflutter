@@ -5,12 +5,17 @@ const multerConfig = require('./config/multer');
 const PostController = require('./controller/PostController');
 const UserController = require('./controller/UserController');
 
+const authMiddleware = require('./middlewares/auth');
+
+routes.use(authMiddleware);
+
 routes.get("/", (req, res) => {
   return res.json({message: "Olá mundo"})
 });
 
-routes.post("/posts/:userId/", multer(multerConfig).single('file'), PostController.store);
+routes.post("/users/post", multer(multerConfig).single('file'), PostController.store);
+routes.get("/users/posts", UserController.listPosts);
+routes.post("/users/:followedId/follow", UserController.followUser);
 
-routes.post("/user", UserController.store);
 
 module.exports = routes;
