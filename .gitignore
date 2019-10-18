@@ -1,4 +1,4 @@
 node_modules
 .env
 tmp/uploads/*
-config/jwt.json
+src/config/jwt.json
