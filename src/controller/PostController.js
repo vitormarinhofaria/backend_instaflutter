@@ -4,7 +4,7 @@ const User = require('../models/Users');
 module.exports = {
   async store(req, res){
     const {location: url = ''} = req.file;
-    const {userId} = req.params;
+    const userId = req.userId;
     const post = await Post.create({
       name: req.file.originalname,
       size: req.file.size,
@@ -21,4 +21,5 @@ module.exports = {
     console.log(user);
     return res.json(post);
   },
+
 };
