@@ -22,4 +22,27 @@ module.exports = {
     return res.json(post);
   },
 
+  async listFollowing(req, res){
+    const userId = req.userId;
+
+    const loggedUser = await User.findById(userId);
+
+    function pushTo(value){
+      let teste = value.posts
+      return teste;
+    }
+    let following
+
+    let posts = await User.find({_id: loggedUser.following}, 'posts').populate('posts');
+
+    let response = [];
+
+    for(i = 0; i < posts.length; i++){
+      for(a = 0; a < posts[i].posts.length; a++){
+        response.push(posts[i].posts[a]);
+      }
+    }
+
+    return res.json(response);
+  }
 };
