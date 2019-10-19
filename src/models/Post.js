@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const {User} = require('./Users');
 
 const PostSchema = new mongoose.Schema({
   name: String,
