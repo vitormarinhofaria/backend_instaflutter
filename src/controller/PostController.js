@@ -27,12 +27,6 @@ module.exports = {
 
     const loggedUser = await User.findById(userId);
 
-    function pushTo(value){
-      let teste = value.posts
-      return teste;
-    }
-    let following
-
     let posts = await User.find({_id: loggedUser.following}, 'posts').populate('posts');
 
     let response = [];
