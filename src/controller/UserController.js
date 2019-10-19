@@ -59,7 +59,7 @@ module.exports = {
       }
     }
     
-    return res.json(auth);
+    return res.json({token: `Bearer ${auth}`});
   },
 
   async listPosts(req, res){
