@@ -14,6 +14,7 @@ routes.get("/", (req, res) => {
 });
 
 routes.post("/users/post", multer(multerConfig).single('file'), PostController.store);
+routes.get("/list/posts", PostController.listFollowing);
 routes.get("/users/posts", UserController.listPosts);
 routes.post("/users/:followedId/follow", UserController.followUser);
 
