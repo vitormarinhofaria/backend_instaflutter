@@ -38,6 +38,7 @@ module.exports = {
       const token = generateToken({id: CreateUser._id})
       response = {token: `Bearer ${token}`}
     }
+    console.log(response);
     return res.json(response);
   },
 
@@ -50,16 +51,17 @@ module.exports = {
     let user = await User.findOne({email});
 
     if(!user){
-      auth = {error: "User not found"};
+      auth = "User not found";
+      return res.status(401).json({erro: auth})
     }else{
       if(user.password != password){
-        auth = {error: "Invalid password"};
+        auth = "Invalid password";
+        return res.status(401).json({erro: auth})
       }else{
         auth = generateToken({id: user._id});
       }
     }
-    
-    return res.json({token: `Bearer ${auth}`});
+    return res.json(`Bearer ${auth}`);
   },
 
   async listPosts(req, res){
@@ -78,10 +80,10 @@ module.exports = {
 
     const followedUser = await User.findById(followedId);
 
-      loggedUser.following.push(followedUser._id);
-      followedUser.followers.push(loggedUser._id);
-      await loggedUser.save();
-      await followedUser.save();
+    loggedUser.following.push(followedUser._id);
+    followedUser.followers.push(loggedUser._id);
+    await loggedUser.save();
+    await followedUser.save();
 
     return res.json({message: "success"});
   }
