@@ -46,6 +46,8 @@ module.exports = {
       'image/jfif',
       'image/webp',
       'image/gif',
+      'image/device',
+      'image/webp',
     ];
 
     if (allowedMimes.includes(file.mimetype)){
